@@ -36,7 +36,9 @@ public class EbXL4 {
     // Initialize the general configuration settings
     EbXL4Configuration.init(new File(event.getModConfigurationDirectory(), "/ebxlpp.cfg"));
     
-    //LogHelper.info("The config file version is %s the mod version", ((GeneralSettings.modVersion.compareTo(GeneralSettings.cfgVersion) == 0) ? "the same as":((GeneralSettings.modVersion.compareTo(GeneralSettings.cfgVersion) > 0) ? "older than":"new than")));
+    if(GeneralSettings.worldID != -1) {
+      worldType = new EbXL4WorldType(GeneralSettings.worldID, "EbXL++");
+    }
   }
   
   @Mod.EventHandler

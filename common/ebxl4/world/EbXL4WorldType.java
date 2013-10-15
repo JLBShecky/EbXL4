@@ -32,4 +32,9 @@ public class EbXL4WorldType extends WorldType {
   public int getSpawnFuzz() {
       return 100;
   }
+  
+  public String getTranslateName()
+  {
+    return "EbXL++";
+  }
 }
