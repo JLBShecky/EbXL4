@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
+import ebxl4.exceptions.WorldIDOverriddenException;
 import ebxl4.lib.EbXL4Configuration;
 import ebxl4.lib.GeneralSettings;
 import ebxl4.lib.ModInfo;
@@ -49,5 +50,9 @@ public class EbXL4 {
   @Mod.EventHandler
   public static void postInit(FMLPostInitializationEvent event) {
     LogHelper.info("Doing post initilization stuff.");
+    // Check to make sure that no other mods overwrote the world type
+    if(WorldType.worldTypes[GeneralSettings.worldID].getWorldTypeName() != "EbXL++") {
+      LogHelper.severe("%s's World ID %d was overridden by another mod.", ModInfo.MOD_NAME, GeneralSettings.worldID);
+    }
   }
 }

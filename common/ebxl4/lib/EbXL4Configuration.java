@@ -9,6 +9,8 @@ import net.minecraftforge.common.Property;
 
 import com.google.common.base.Optional;
 
+import ebxl4.exceptions.NoFreeWorldIDsException;
+import ebxl4.exceptions.WorldIDTakenException;
 import ebxl4.lib.settingsupdates.TestSampleUpdate;
 
 public abstract class EbXL4Configuration {
@@ -36,18 +38,19 @@ public abstract class EbXL4Configuration {
             for(int i = 3; i < WorldType.worldTypes.length; i++) {
               if(WorldType.worldTypes[i] == null) {
                 worldId.set(i);
-                LogHelper.severe("The World ID was set to %d.", worldId.getInt());
+                LogHelper.info("The World ID was set to %d.", worldId.getInt());
                 break;
               }
             }
             
             if(worldId.getInt() == -1) {
               LogHelper.severe("There are no free world types.");
+              throw new NoFreeWorldIDsException();
             }
           }
         } else if(WorldType.worldTypes[worldId.getInt()] != null) {
           LogHelper.severe("Another Mod is using World ID %d. You will need to change %s's World ID, or the one used by the other mod.", worldId.getInt(), ModInfo.MOD_NAME);
-          worldId.set(-1);
+          throw new WorldIDTakenException();
         }
                
         GeneralSettings.worldID = worldId.getInt();
