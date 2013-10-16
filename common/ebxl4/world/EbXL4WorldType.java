@@ -2,8 +2,15 @@ package ebxl4.world;
 
 import java.util.List;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+import ebxl4.lib.LogHelper;
 import ebxl4.world.biome.EbXL4ChunkManager;
 import ebxl4.world.chunk.EbXL4ChunkProvider;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiCreateFlatWorld;
+import net.minecraft.client.gui.GuiCreateWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
 import net.minecraft.world.biome.BiomeCache;
@@ -36,5 +43,27 @@ public class EbXL4WorldType extends WorldType {
   public String getTranslateName()
   {
     return "EbXL++";
+  }
+  
+  /**
+   * Called when the 'Customize' button is pressed on world creation GUI
+   * @param instance The minecraft instance
+   * @param guiCreateWorld the createworld GUI
+   */
+  @Override
+  @SideOnly(Side.CLIENT)
+  public void onCustomizeButton(Minecraft instance, GuiCreateWorld guiCreateWorld)
+  {
+      LogHelper.info("Customise EbXL++ World Event.");
+  }
+
+  /*
+   * Should world creation GUI show 'Customize' button for this world type?
+   * @return if this world type has customization parameters
+   */
+  @Override
+  public boolean isCustomizable()
+  {
+      return true;
   }
 }
