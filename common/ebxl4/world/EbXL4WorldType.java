@@ -40,10 +40,10 @@ public class EbXL4WorldType extends WorldType {
       return 100;
   }
   
-  public String getTranslateName()
-  {
-    return "EbXL++";
-  }
+  //public String getTranslateName()
+  //{
+  //  return "EbXL++";
+  //}
   
   /**
    * Called when the 'Customize' button is pressed on world creation GUI
